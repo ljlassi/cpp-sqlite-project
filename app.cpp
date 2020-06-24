@@ -1,19 +1,15 @@
 #include <iostream>
+#include <string>
 #include <sqlite3.h>
+#include "DatabaseConnection.hpp"
 
 int main(int argc, char* argv[]) {
-  sqlite3 *db;
-  char *zErrMsg = 0;
-  int rc;
 
-  rc = sqlite3_open("test.db", &db);
+  const char *dbname;
+  dbname = "test.db";
 
-  if (rc) {
-    std::cout <<"DB open error" << sqlite3_errmsg(db) << std::endl;
-    return(0);
-  }
-  else {
-    std::cout <<"Opened database succesfully " << std::endl;
-  }
-  sqlite3_close(db);
+  DatabaseConnection dbconnection(dbname);
+  dbconnection.connectToDB();
+  dbconnection.closeDBConnection();
+  return 0;
 }
