@@ -6,10 +6,14 @@
 int main(int argc, char* argv[]) {
 
   const char *dbname;
-  dbname = "test.db";
+  std::string sql;
+  sql = "CREATE TABLE PEOPLE ("  \
+      "ID INT PRIMARY KEY     NOT NULL," \
+      "NAME           TEXT    NOT NULL);";
 
-  DatabaseConnection dbconnection(dbname);
+  DatabaseConnection dbconnection;
   dbconnection.connectToDB();
+  dbconnection.runSQL(sql);
   dbconnection.closeDBConnection();
   return 0;
 }

@@ -3,26 +3,37 @@
 #include <sqlite3.h>
 #include "DatabaseConnection.hpp"
 
-DatabaseConnection::DatabaseConnection(const char* db_name) {
-  this->db_name = db_name;
-}
-
 void DatabaseConnection::connectToDB() {
-  this->rc = sqlite3_open(this->db_name, &this->db);
-  if (this->rc) {
-    std::cout << "Failed to open database connection" << sqlite3_errmsg(this->db) << std::endl;
+  m_rc = sqlite3_open(DB_NAME, &m_db);
+  if (m_rc) {
+    std::cout << "Failed to open database connection" << sqlite3_errmsg(m_db) << std::endl;
   }
   else {
-    std::cout << "Opened database connection succesfully" << sqlite3_errmsg(this->db) << std::endl;
+    std::cout << "Opened database connection succesfully" << std::endl;
   }
 }
 
 void DatabaseConnection::closeDBConnection() {
-  this->rc = sqlite3_close(this->db);
-  if (this->rc) {
+  m_rc = sqlite3_close(m_db);
+  if (m_rc) {
     std::cout << "Closed database connection succesfully." << std::endl;
   }
   else {
-    std::cout << "Possibly failed to close database connection. Error message: " << sqlite3_errmsg(this->db) << std::endl;
+    std::cout << "Possibly failed to close database connection. Error message: " << sqlite3_errmsg(m_db) << std::endl;
+  }
+}
+
+int DatabaseConnection::callBack(void *NotUsed, int argc, char **argv, char **azColName) {
+  return 0;
+}
+
+
+void DatabaseConnection::runSQL(const std::string& sql) {
+  m_rc = sqlite3_exec(m_db, sql.c_str(), &DatabaseConnection::callBack, 0, &m_zErrMsg);
+  if (m_rc) {
+    std::cout << "Operation successful." << std::endl;
+  }
+  else {
+    std::cout << "Failed to do the operation. Error message: " << sqlite3_errmsg(m_db) << std::endl;
   }
 }
