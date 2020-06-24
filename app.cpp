@@ -8,11 +8,13 @@ int main(int argc, char* argv[]) {
   const char *dbname;
   std::string sql;
   sql = "CREATE TABLE PEOPLE ("  \
-      "ID INT PRIMARY KEY     NOT NULL," \
+      "ID INTEGER PRIMARY KEY     AUTOINCREMENT," \
       "NAME           TEXT    NOT NULL);";
 
   DatabaseConnection dbconnection;
   dbconnection.connectToDB();
+  dbconnection.runSQL(sql);
+  sql = "INSERT INTO PEOPLE (NAME) VALUES ('Trump')";
   dbconnection.runSQL(sql);
   dbconnection.closeDBConnection();
   return 0;
