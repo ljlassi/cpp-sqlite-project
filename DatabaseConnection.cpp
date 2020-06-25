@@ -19,7 +19,7 @@ void DatabaseConnection::closeDBConnection() {
     std::cout << "Possibly failed to close database connection." << std::endl;
   }
   else {
-    std::cout << "Closed database connection succesfully." << std::endl;
+    std::cout << "Closed database connection closed succesfully." << std::endl;
   }
 }
 

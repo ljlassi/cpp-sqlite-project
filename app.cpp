@@ -6,7 +6,7 @@
 int main(int argc, char* argv[]) {
 
   std::string sql;
-  sql = "CREATE TABLE PEOPLE ("  \
+  sql = "CREATE TABLE IF NOT EXISTS PEOPLE ("  \
       "ID INTEGER PRIMARY KEY     AUTOINCREMENT," \
       "NAME           TEXT    NOT NULL);";
 
