@@ -16,10 +16,10 @@ void DatabaseConnection::connectToDB() {
 void DatabaseConnection::closeDBConnection() {
   m_rc = sqlite3_close(m_db);
   if (m_rc) {
-    std::cout << "Closed database connection succesfully." << std::endl;
+    std::cout << "Possibly failed to close database connection." << std::endl;
   }
   else {
-    std::cout << "Possibly failed to close database connection. Error message: " << sqlite3_errmsg(m_db) << std::endl;
+    std::cout << "Closed database connection succesfully." << std::endl;
   }
 }
 
@@ -31,9 +31,9 @@ int DatabaseConnection::callBack(void *NotUsed, int argc, char **argv, char **az
 void DatabaseConnection::runSQL(const std::string& sql) {
   m_rc = sqlite3_exec(m_db, sql.c_str(), &DatabaseConnection::callBack, 0, &m_zErrMsg);
   if (m_rc) {
-    std::cout << "Operation successful." << std::endl;
+    std::cout << "Failed to do the operation. Error message: " << sqlite3_errmsg(m_db) << std::endl;
   }
   else {
-    std::cout << "Failed to do the operation. Error message: " << sqlite3_errmsg(m_db) << std::endl;
+    std::cout << "Operation successful." << std::endl;
   }
 }

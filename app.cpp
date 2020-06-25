@@ -5,7 +5,6 @@
 
 int main(int argc, char* argv[]) {
 
-  const char *dbname;
   std::string sql;
   sql = "CREATE TABLE PEOPLE ("  \
       "ID INTEGER PRIMARY KEY     AUTOINCREMENT," \
