@@ -11,4 +11,5 @@ public:
   void closeDBConnection();
   static int callBack(void*, int, char**, char**);
   void runSQL(const std::string& sql);
+  void selectQuery(const std::string& sql);
 };

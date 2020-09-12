@@ -15,6 +15,8 @@ int main(int argc, char* argv[]) {
   dbconnection.runSQL(sql);
   sql = "INSERT INTO PEOPLE (NAME) VALUES ('Trump')";
   dbconnection.runSQL(sql);
+  sql = "SELECT NAME FROM PEOPLE";
+  dbconnection.selectQuery(sql);
   dbconnection.closeDBConnection();
   return 0;
 }
